@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Pr3 {
+            constructor(limit) {
+                this.stack = [];
+                this.size = this.stack.length;
+                this.limit = limit || 10;
+
+
+            }
+            enqueue(data) {
+                if (this.stack.length > this.limit) {
+                    console.log("your limit is complented so we can't enqueue");
+                } else {
+                    this.stack.push(data);
+                    this.size++;
+                }
+            }
+            reverseStack() {
+                let stack2 = [];
+                while (this.stack.length > 0) {
+                    stack2.push(this.stack.pop());
+                }
+                this.stack = stack2;
+
+                return this.stack;
+            }
+
+            deleteMiddle() {
+                let stack2 = [];
+                let mid = Math.floor(this.stack.length / 2);
+                for (let i = 0; i < mid; i++) {
+                    stack2.push(this.stack.pop());
+                }
+                this.stack.pop();
+                console.log("stack2 ",stack2);
+                console.log("stack",this.stack);
+
+                for (let j = 0; j < mid; j++) {
+                    this.stack.push(stack2.pop());
+                }
+                return this.stack;
+            }
+ 
+
+            sortStack() {
+                let stack2 = [];
+
+                while (this.stack.length > 0) {
+                    let temp = this.stack.pop();
+                    while (stack2.length > 0 && stack2[stack2.length - 1] > temp) {
+                        this.stack.push(stack2.pop());
+                    }
+                    stack2.push(temp);
+                }
+                this.stack = stack2;
+                return this.stack;
+
+                
+            }
+
+
+        }
+
+        let stack = new Pr3(10);
+        stack.enqueue(1);
+        stack.enqueue(2);
+        stack.enqueue(3);
+        stack.enqueue(4);
+        stack.enqueue(5);
+
+        console.log(stack);
+        console.log("reverced stack", stack.reverseStack());
+        console.log("midd", stack.deleteMiddle());
+
+
+        // console.log("sorted stack", stack.sortStack());
+
+    </script>
+</body>
+
+</html>
